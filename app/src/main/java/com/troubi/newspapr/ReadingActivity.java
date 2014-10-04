@@ -28,18 +28,16 @@ public class ReadingActivity extends Activity implements Runnable {
      */
     private static final int WORD_DISPLAY_TIME = 200;
 
-    private static final int WORD_DISPLAY_TIME_EXTRA = 100;
-
     /**
      * The first word is displayed a bit longer for orientation
      */
-    private static final int STARTING_DELAY = 1000;
+    private static final int STARTING_DELAY = WORD_DISPLAY_TIME * 4;
 
 
     /**
      * The last word is displayed a bit longer for orientation
      */
-    private static final int ENDING_DELAY = 1500;
+    private static final int ENDING_DELAY = STARTING_DELAY;
 
     /**
      * The highlighted char will be roughly at RELATIVE_HIGHLIGHT_POSITION * word.length
@@ -86,32 +84,10 @@ public class ReadingActivity extends Activity implements Runnable {
         mText.setText(highlightPivotPosition(word));
 
         if (mTextArrayPosition < mTextArray.length - 1) {
-            int delay = WORD_DISPLAY_TIME ;
-
-            if (isExtraTimeWord(word)) {
-                delay += WORD_DISPLAY_TIME_EXTRA;
-            }
-
-            mHandler.postDelayed(this, delay );
+            mHandler.postDelayed(this, WORD_DISPLAY_TIME);
         } else {
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    startNewspaprActivity();
-                }
-            }, ENDING_DELAY);
-
+            startNewspaprActivity();
         }
-    }
-
-    /**
-     * Determines whether a word is legitimate to be shown
-     * for some extra time
-     * @param word word to test
-     * @return true if extra time is granted, wrong otherwise.
-     */
-    private boolean isExtraTimeWord(String word) {
-        return word.contains(",") || word.contains(".");
     }
 
     private void startNewspaprActivity() {
@@ -122,11 +98,8 @@ public class ReadingActivity extends Activity implements Runnable {
 
     private Spannable highlightPivotPosition(String text) {
         SpannableStringBuilder word = new SpannableStringBuilder(text);
-        int highlightPosition = (int) Math.ceil(text.length() * RELATIVE_HIGHLIGHT_POSITION);
 
-        if (highlightPosition >= text.length()) {
-            highlightPosition = text.length() - 1;
-        }
+        int highlightPosition = (int) Math.floor(text.length() * RELATIVE_HIGHLIGHT_POSITION);
 
         word.setSpan(
                 new ForegroundColorSpan(Color.RED),

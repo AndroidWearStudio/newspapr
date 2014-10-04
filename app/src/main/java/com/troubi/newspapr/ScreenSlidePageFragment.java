@@ -18,11 +18,9 @@ package com.troubi.newspapr;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.wearable.view.WatchViewStub;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +48,7 @@ public class ScreenSlidePageFragment extends Fragment {
     private TextView mTitle;
     private ImageView mImage;
 
-    private DataFetcher.Article mCurrentArticle;
+    private DataFetcher.Article2 mCurrentArticle;
 
 
 
@@ -89,10 +87,8 @@ public class ScreenSlidePageFragment extends Fragment {
                 mImage = (ImageView) stub.findViewById(R.id.newspapr_image);
 
 
-                String category = getActivity().getIntent().getStringExtra(NewspaprActivity.INTENT_EXTRA_CATEGORY);
 
-
-                mCurrentArticle = DataFetcher.getArticle(getActivity(), mPageNumber);
+                mCurrentArticle =  DataFetcher.getArticle(getActivity(), mPageNumber);
                 mTitle.setText(mCurrentArticle.title);
                 mImage.setImageBitmap(mCurrentArticle.image);
 
