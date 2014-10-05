@@ -28,6 +28,8 @@ public class ReadingActivity extends Activity implements Runnable {
      */
     private static final int WORD_DISPLAY_TIME = 200;
 
+    private static final int WORD_DISPLAY_TIME_EXTRA = 100;
+
     /**
      * The first word is displayed a bit longer for orientation
      */
@@ -84,10 +86,26 @@ public class ReadingActivity extends Activity implements Runnable {
         mText.setText(highlightPivotPosition(word));
 
         if (mTextArrayPosition < mTextArray.length - 1) {
-            mHandler.postDelayed(this, WORD_DISPLAY_TIME);
+            int delay = WORD_DISPLAY_TIME ;
+
+            if (isExtraTimeWord(word)) {
+                delay += WORD_DISPLAY_TIME_EXTRA;
+            }
+
+            mHandler.postDelayed(this, delay );
         } else {
             startNewspaprActivity();
         }
+    }
+
+    /**
+     * Determines whether a word is legitimate to be shown
+     * for some extra time
+     * @param word word to test
+     * @return true if extra time is granted, wrong otherwise.
+     */
+    private boolean isExtraTimeWord(String word) {
+        return word.contains(",") || word.contains(".");
     }
 
     private void startNewspaprActivity() {
