@@ -6,15 +6,20 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.mariux.teleport.lib.TeleportClient;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
+import android.support.v4.content.LocalBroadcastManager;
 
 
 public class NewsPaprActivity extends Activity
         implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String HELLO_WORLD_MOBILE_PATH = "/hello-world-mobile";
+
+    public static final String BROADCAST_MSG = "broadcast";
 
 
     TeleportClient mTeleportClient;
@@ -27,27 +32,28 @@ public class NewsPaprActivity extends Activity
         //Connect the GoogleApiClient
         mTeleportClient = new TeleportClient(this);
 
-        TextView mCircledImageView = (TextView) findViewById(R.id.text2);
-        mCircledImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendMessage();
-            }
-
-
-        });
+        LocalBroadcastManager.getInstance(this)
+                .registerReceiver(mMessageReceiver, new IntentFilter(BROADCAST_MSG));
     }
+
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String json = intent.getStringExtra("json");
+            sendMessage(json.getBytes());
+        }
+    };
 
 
     /**
      * Send message to mobile handheld
      */
-    private void sendMessage() {
+    private void sendMessage(byte[] payload) {
 
         if (mTeleportClient.getGoogleApiClient() != null && mTeleportClient.getGoogleApiClient()
                 .isConnected()) {
 
-            mTeleportClient.sendMessage(HELLO_WORLD_MOBILE_PATH, null);
+            mTeleportClient.sendMessage(HELLO_WORLD_MOBILE_PATH, payload);
 
         }
     }
