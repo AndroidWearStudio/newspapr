@@ -30,16 +30,12 @@ public class ListenerServicefromMobile extends WearableListenerService {
             Intent intent = new Intent(this, WearNewsPaprActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("json", json);
-            Log.e("YOL", json);
             Gson gson = new Gson();
             List<Article> a = gson.fromJson(json,
                     new TypeToken<List<Article>>
                             () {
                     }.getType());
 
-            for (Article article: a){
-                Log.e("kIWX", article.getText()+ "");
-            }
             startActivity(intent);
         }
 
