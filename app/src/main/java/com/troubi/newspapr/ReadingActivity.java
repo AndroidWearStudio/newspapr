@@ -99,7 +99,15 @@ public class ReadingActivity extends Activity implements Runnable {
 
         if (mTextArrayPosition < mTextArray.length - 1) {
             mHandler.postDelayed(this, WORD_DISPLAY_TIME);
+        } else {
+            startNewspaprActivity();
         }
+    }
+
+    private void startNewspaprActivity() {
+        setResult(RESULT_OK);
+        finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
     private Spannable highlightPivotPosition(String text) {

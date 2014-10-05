@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 public class NewspaprActivity extends Activity {
 
+    private static final int REQUEST_CODE_READING = 1337;
+
     private TextView mTitle;
     private ImageView mImage;
 
@@ -39,9 +41,19 @@ public class NewspaprActivity extends Activity {
         reading.putExtra(ReadingActivity.INTENT_EXTRA_TEXT, text);
         reading.putExtra(ReadingActivity.INTENT_EXTRA_IMAGE, image);
 
-        startActivity(reading);
+        startActivityForResult(reading, REQUEST_CODE_READING);
 
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_READING) {
+            if (resultCode == RESULT_OK) {
+
+            }
+        }
+    }
 }
