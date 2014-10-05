@@ -5,4 +5,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+
+
+    <style name="CategoryButton">
+        <item name="android:onClick">categoryButtonClick</item>
+        <item name="android:minHeight">67dp</item>
+    </style>
+
 </resources>
