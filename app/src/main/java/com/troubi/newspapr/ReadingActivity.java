@@ -33,13 +33,13 @@ public class ReadingActivity extends Activity implements Runnable {
     /**
      * The first word is displayed a bit longer for orientation
      */
-    private static final int STARTING_DELAY = WORD_DISPLAY_TIME * 4;
+    private static final int STARTING_DELAY = 1000;
 
 
     /**
      * The last word is displayed a bit longer for orientation
      */
-    private static final int ENDING_DELAY = STARTING_DELAY;
+    private static final int ENDING_DELAY = 1500;
 
     /**
      * The highlighted char will be roughly at RELATIVE_HIGHLIGHT_POSITION * word.length
@@ -94,7 +94,13 @@ public class ReadingActivity extends Activity implements Runnable {
 
             mHandler.postDelayed(this, delay );
         } else {
-            startNewspaprActivity();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startNewspaprActivity();
+                }
+            }, ENDING_DELAY);
+
         }
     }
 
