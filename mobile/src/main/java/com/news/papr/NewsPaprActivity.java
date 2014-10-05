@@ -43,7 +43,6 @@ public class NewsPaprActivity extends Activity
      * Send message to mobile handheld
      */
     private void sendMessage() {
-
         if (mTeleportClient.getGoogleApiClient() != null && mTeleportClient.getGoogleApiClient()
                 .isConnected()) {
 
