@@ -6,12 +6,8 @@
     android:id="@+id/watch_view_stub"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:rectLayout="@layout/rect_activity_newspapr"
-    app:roundLayout="@layout/round_activity_newspapr"
-    tools:context=".NewspaprActivity"
+    app:rectLayout="@layout/rect_activity_reading"
+    app:roundLayout="@layout/round_activity_reading"
+    tools:context="com.troubi.newspapr.ReadingActivity"
     tools:deviceIds="wear">
-
-
-
-
 </android.support.wearable.view.WatchViewStub>

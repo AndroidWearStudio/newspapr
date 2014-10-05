@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".NewspaprActivity"
+    tools:context="com.troubi.newspapr.ReadingActivity"
     tools:deviceIds="wear_square">
 
 
     <ImageView
-        android:id="@+id/newspapr_image"
+        android:id="@+id/reading_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
         android:src="@drawable/dummy_background" />
 
     <TextView
-        android:id="@+id/newspapr_title"
+        android:id="@+id/reading_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/newspapr_title"
-        android:text="@string/hello_square" />
+        android:layout_height="match_parent"
+        android:gravity="center"
+        style="@style/reading_text"
+        android:text="@string/app_name" />
 
 
-</FrameLayout>
+
+
+</RelativeLayout>
