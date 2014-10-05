@@ -24,7 +24,7 @@ public class Utility {
         final ScriptIntrinsicBlur script = ScriptIntrinsicBlur
                 .create(rs, Element.U8_4(rs));
         script.setInput(input);
-        script.setRadius(25f);
+        script.setRadius(15f);
         script.forEach(output);
         output.copyTo(photo);
         return photo;
