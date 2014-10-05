@@ -15,13 +15,13 @@ public class DataFetcher {
         public Bitmap image;
     }
 
-    public static Article[] fetchArticles(Context ctx) {
+    private static Article[] fetchArticles(Context ctx) {
 
         Article[] a = new Article[3];
 
         Article a1 = new Article();
         a1.title = "article #1 title";
-        a1.text = "article #1 text";
+        a1.text = "Thank you, everyone. It’s great to see all of you. Welcome to Google I/O. Every year, we look forward to this date. We’ve been hard at work since last I/O evolving our platforms so that developers like you can build amazing experiences. So thank you for joining us in person. I/O is a pretty global event. We have viewing parties in over 597 locations in 85 countries, in six continents. And there are over one million people watching this on the live stream today. Let’s say hello to a few locations.";
         a1.image = BitmapFactory.decodeResource(ctx.getResources(),
                 R.drawable.dummy_background);
 
@@ -44,5 +44,13 @@ public class DataFetcher {
         a[2] = a3;
 
         return a;
+    }
+
+    public static int getNumArticles() {
+        return 3;
+    }
+
+    public static Article getArticle(Context ctx, int id) {
+        return fetchArticles(ctx)[id];
     }
 }

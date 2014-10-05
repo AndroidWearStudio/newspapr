@@ -16,11 +16,16 @@
 
 package com.troubi.newspapr;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.wearable.view.WatchViewStub;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ScreenSlidePageFragment extends Fragment {
@@ -29,10 +34,24 @@ public class ScreenSlidePageFragment extends Fragment {
      */
     public static final String ARG_PAGE = "page";
 
+
+    private static final int REQUEST_CODE_READING = 1337;
+
+
     /**
      * The fragment's page number, which is set to the argument value for {@link #ARG_PAGE}.
      */
     private int mPageNumber;
+
+
+
+
+    private TextView mTitle;
+    private ImageView mImage;
+
+    private DataFetcher.Article mCurrentArticle;
+
+
 
     /**
      * Factory method for this fragment class. Constructs a new fragment for the given page number.
@@ -61,8 +80,52 @@ public class ScreenSlidePageFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater
                 .inflate(R.layout.activity_newspapr, container, false);
 
+        final WatchViewStub stub = (WatchViewStub) rootView.findViewById(R.id.watch_view_stub);
+        stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
+            @Override
+            public void onLayoutInflated(WatchViewStub stub) {
+                mTitle = (TextView) stub.findViewById(R.id.newspapr_title);
+                mImage = (ImageView) stub.findViewById(R.id.newspapr_image);
+
+
+
+                mCurrentArticle =  DataFetcher.getArticle(getActivity(), mPageNumber);
+                mTitle.setText(mCurrentArticle.title);
+                mImage.setImageBitmap(mCurrentArticle.image);
+
+                View.OnClickListener listener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startReadingActivity(mCurrentArticle.text.replaceAll("\\s+", " ").split(" "), mCurrentArticle.image);
+                    }
+                };
+
+                mTitle.setOnClickListener(listener);
+                mImage.setOnClickListener(listener);
+
+
+            }
+        });
+
+
         return rootView;
     }
+
+
+
+    private void startReadingActivity(String[] text, Bitmap image) {
+        Intent reading = new Intent(getActivity(), ReadingActivity.class);
+        reading.putExtra(ReadingActivity.INTENT_EXTRA_TEXT, text);
+        reading.putExtra(ReadingActivity.INTENT_EXTRA_IMAGE, image);
+
+        startActivityForResult(reading, REQUEST_CODE_READING);
+        getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+
+
+
+
 
     /**
      * Returns the page number represented by this fragment object.
