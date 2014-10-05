@@ -18,6 +18,8 @@ import android.widget.TextView;
 public class NewspaprActivity extends FragmentActivity {
 
 
+    public static final String INTENT_EXTRA_CATEGORY = "category";
+
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
      * and next wizard steps.
