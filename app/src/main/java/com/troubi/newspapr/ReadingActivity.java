@@ -1,11 +1,9 @@
 package com.troubi.newspapr;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BlurMaskFilter;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,6 +32,12 @@ public class ReadingActivity extends Activity implements Runnable {
      * The first word is displayed a bit longer for orientation
      */
     private static final int STARTING_DELAY = WORD_DISPLAY_TIME * 4;
+
+
+    /**
+     * The last word is displayed a bit longer for orientation
+     */
+    private static final int ENDING_DELAY = STARTING_DELAY;
 
     /**
      * The highlighted char will be roughly at RELATIVE_HIGHLIGHT_POSITION * word.length
@@ -64,30 +68,12 @@ public class ReadingActivity extends Activity implements Runnable {
                 mText.setText(mTextArray[0]);
                 mTextArrayPosition = 0;
                 Bitmap image = (Bitmap) getIntent().getExtras().getParcelable(INTENT_EXTRA_IMAGE);
-                mImage.setImageBitmap(image);
-                mImage.setImageBitmap(createBlurImage());
+                mImage.setImageBitmap(Utility.createBlurImage(ReadingActivity.this, image));
 
 
                 mHandler.postDelayed(ReadingActivity.this, STARTING_DELAY);
             }
         });
-    }
-
-    private Bitmap createBlurImage() {
-        final Bitmap photo = ((BitmapDrawable) mImage.getDrawable())
-                .getBitmap().copy(Bitmap.Config.ARGB_8888, true);
-        final RenderScript rs = RenderScript.create(this);
-        final Allocation input = Allocation
-                .createFromBitmap(rs, photo, Allocation.MipmapControl.MIPMAP_NONE,
-                        Allocation.USAGE_SCRIPT);
-        final Allocation output = Allocation.createTyped(rs, input.getType());
-        final ScriptIntrinsicBlur script = ScriptIntrinsicBlur
-                .create(rs, Element.U8_4(rs));
-        script.setInput(input);
-        script.setRadius(25f);
-        script.forEach(output);
-        output.copyTo(photo);
-        return photo;
     }
 
     @Override

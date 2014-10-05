@@ -15,7 +15,7 @@ import android.widget.ImageView;
 public class Utility {
 
 
-    private Bitmap createBlurImage(Context ctx, Bitmap photo) {
+    public static Bitmap createBlurImage(Context ctx, Bitmap photo) {
         final RenderScript rs = RenderScript.create(ctx);
         final Allocation input = Allocation
                 .createFromBitmap(rs, photo, Allocation.MipmapControl.MIPMAP_NONE,
@@ -30,7 +30,7 @@ public class Utility {
         return photo;
     }
 
-    private Bitmap createBlurImage(Context ctx, ImageView imageView) {
+    public static Bitmap createBlurImage(Context ctx, ImageView imageView) {
         BitmapDrawable drawable = ((BitmapDrawable) imageView.getDrawable());
         Bitmap bm = drawable.getBitmap();
         return createBlurImage(ctx, bm.copy(Bitmap.Config.ARGB_8888, true));
