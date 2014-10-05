@@ -4,7 +4,5 @@
     <string name="app_name">newspapr</string>
     <string name="hello_round">Awesome article title</string>
     <string name="hello_square">Awesome article title</string>
-    <string name="title_activity_reading">ReadingActivity</string>
-    <string name="title_activity_category">CategoryActivity</string>
 
 </resources>
