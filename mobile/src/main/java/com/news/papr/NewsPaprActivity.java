@@ -26,16 +26,6 @@ public class NewsPaprActivity extends Activity
 
         //Connect the GoogleApiClient
         mTeleportClient = new TeleportClient(this);
-
-        TextView mCircledImageView = (TextView) findViewById(R.id.text2);
-        mCircledImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendMessage();
-            }
-
-
-        });
     }
 
 
