@@ -12,34 +12,36 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.54" >
+            android:layout_height="150dp"
+            android:layout_weight="0.54">
 
             <Button
-                android:id="@+id/main_category_button_awesomeness"
+                android:text="bla"
+                android:id="@+id/category1"
                 style="@style/CategoryButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/btn_default_holo_light_blue"
-                android:text="@string/category_awesomeness" />
+                />
 
             <Button
-                android:id="@+id/main_category_button_legendary"
+                android:text="bla"
+                android:id="@+id/category2"
                 style="@style/CategoryButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.00"
                 android:background="@drawable/btn_default_holo_light_green"
-                android:text="@string/category_legendary" />
+                />
         </LinearLayout>
 
         <Button
-            android:id="@+id/main_category_button_highfive"
+            android:text="bla"
+            android:id="@+id/category3"
             style="@style/CategoryButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/category_highfive"
+            android:layout_height="100dp"
             android:background="@drawable/btn_default_holo_light_orange" />
 
         <LinearLayout
@@ -47,21 +49,21 @@
             android:layout_height="99dp" >
 
             <Button
-                android:id="@+id/main_category_button_bestfriend"
+                android:text="bla"
+                android:id="@+id/category4"
                 style="@style/CategoryButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/category_bestfriend"
                 android:background="@drawable/btn_default_holo_light_purple" />
 
             <Button
-                android:id="@+id/main_category_button_haveyoumet"
+                android:text="bla"
+                android:id="@+id/category5"
                 style="@style/CategoryButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/category_haveyoumet"
                 android:background="@drawable/btn_default_holo_light_red" />
         </LinearLayout>
 
@@ -78,19 +80,19 @@
                 android:orientation="vertical" >
 
                 <Button
-                    android:id="@+id/main_category_button_suits"
+                    android:text="bla"
+                    android:id="@+id/category6"
                     style="@style/CategoryButton"
                     android:layout_width="match_parent"
                     android:layout_height="152dp"
-                    android:text="@string/category_suits"
                     android:background="@drawable/btn_default_holo_light_blue"/>
 
                 <Button
-                    android:id="@+id/main_category_button_misc"
+                    android:text="bla"
+                    android:id="@+id/category7"
                     style="@style/CategoryButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/category_misc"
                     android:background="@drawable/btn_default_holo_light_green" />
             </LinearLayout>
 
@@ -101,19 +103,20 @@
                 android:orientation="vertical" >
 
                 <Button
-                    android:id="@+id/main_category_button_music"
+                    android:text="bla"
+                    android:id="@+id/category8"
                     style="@style/CategoryButton"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/category_music"
+                    android:layout_height="220dp"
                     android:background="@drawable/btn_default_holo_light_orange"/>
 
                 <Button
-                    android:id="@+id/main_category_coming_soon"
+                    android:text="bla"
+                    android:id="@+id/category9"
                     style="@style/CategoryButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/category_coming_soon"  />
+                    />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
