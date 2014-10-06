@@ -32,7 +32,7 @@ public class ReadingActivity extends Activity implements Runnable {
     /**
      * The last word is displayed a bit longer for orientation
      */
-    private static final int ENDING_DELAY = 1500;
+    private static final int ENDING_DELAY = 2000;
 
     /**
      * The highlighted char will be roughly at RELATIVE_HIGHLIGHT_POSITION * word.length
