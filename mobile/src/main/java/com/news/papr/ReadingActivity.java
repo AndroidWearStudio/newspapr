@@ -113,7 +113,7 @@ public class ReadingActivity extends Activity implements Runnable {
 
     private Spannable highlightPivotPosition(String text) {
         SpannableStringBuilder word = new SpannableStringBuilder(text);
-        int highlightPosition = (int) Math.ceil(text.length() * RELATIVE_HIGHLIGHT_POSITION);
+        int highlightPosition = (int) Math.floor(text.length() * RELATIVE_HIGHLIGHT_POSITION);
 
         if (highlightPosition >= text.length()) {
             highlightPosition = text.length() - 1;

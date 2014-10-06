@@ -2,11 +2,11 @@ package com.news.papr.model;
 
 public class Article {
 
-    private String image;
+    public String image;
 
-    private String text;
+    public String text;
 
-    private String title;
+    public String title;
 
     public String getImage() {
         return this.image;

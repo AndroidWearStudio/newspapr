@@ -1,19 +1,20 @@
 package com.news.papr;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import com.mariux.teleport.lib.TeleportClient;
-
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.mariux.teleport.lib.TeleportClient;
+import com.news.papr.model.Article;
 
 
 public class NewsPaprActivity extends Activity
@@ -38,8 +39,52 @@ public class NewsPaprActivity extends Activity
                 .registerReceiver(mMessageReceiver, new IntentFilter(BROADCAST_MSG));
 
 
-        loadContent();
+        Article[] articles = fetchArticles(this);
+
+        loadContent(articles);
     }
+
+
+    private static Article[] fetchArticles(Context ctx) {
+
+        Article[] a = new Article[9];
+
+        Article a1 = new Article();
+        a1.title = "article #1 title";
+        a1.text = "Thank you, everyone. It’s great to see all of you. Welcome to Google I/O. Every year, we look forward to this date. We’ve been hard at work since last I/O evolving our platforms so that developers like you can build amazing experiences. So thank you for joining us in person. I/O is a pretty global event. We have viewing parties in over 597 locations in 85 countries, in six continents. And there are over one million people watching this on the live stream today. Let’s say hello to a few locations.";
+        a1.image = BitmapFactory.decodeResource(ctx.getResources(),
+                R.drawable.dummy_background);
+
+
+        Article a2 = new Article();
+        a2.title = "article #2 title";
+        a2.text = "article #2 text";
+        a2.image = BitmapFactory.decodeResource(ctx.getResources(),
+                R.drawable.dummy_background);
+
+        Article a3 = new Article();
+        a3.title = "article #3 title";
+        a3.text = "article #3 text";
+        a3.image = BitmapFactory.decodeResource(ctx.getResources(),
+                R.drawable.dummy_background);
+
+
+
+        a[0] = a1;
+        a[1] = a2;
+        a[2] = a3;
+        a[3] = a1;
+        a[4] = a2;
+        a[5] = a3;
+        a[6] = a1;
+        a[7] = a2;
+        a[8] = a3;
+
+        // ATTENTION: RETURN AT LEAST 9 ITEMS
+
+        return a;
+    }
+
 
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
@@ -64,17 +109,19 @@ public class NewsPaprActivity extends Activity
     }
 
 
-    private void loadContent() {
+    private void loadContent(final Article[] articles) {
         Button[] buttons = getCategoryButtons();
-
 
         int i = 0;
         for (Button b : buttons) {
+            final int in = i;
+            b.setText(articles[in].title);
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent reading = new Intent(NewsPaprActivity.this, ReadingActivity.class);
-                    // reading.putExtra(ReadingActivity.INTENT_EXTRA_TEXT, text[i]);
+                    reading.putExtra(ReadingActivity.INTENT_EXTRA_TEXT, articles[in].text.split(" "));
+                    reading.putExtra(ReadingActivity.INTENT_EXTRA_IMAGE, articles[in].image);
 
 
                     startActivity(reading);
@@ -98,10 +145,8 @@ public class NewsPaprActivity extends Activity
         buttons[7] = (Button) findViewById(R.id.category8);
         buttons[8] = (Button) findViewById(R.id.category9);
 
-
         return buttons;
     }
-
 
 
     @Override
